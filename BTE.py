@@ -313,6 +313,7 @@ def transport_properties(band_structure, nkpt, a, b, c, T_K,
         tau0_s=tau0_s,
         Nv_vb=Nv_vb,
         Nv_cb=Nv_cb,
+        mu_J = None
     )
 
     E_grid     = np.asarray(pre["E_centers_J"], dtype=float)
@@ -371,4 +372,5 @@ def transport_properties(band_structure, nkpt, a, b, c, T_K,
         "channel_xE": channel_xE, "channel_yE": channel_yE, "channel_zE": channel_zE,
         "DOS_cell": pre["DOS_cell"],
         "N_nuclea_auto": N_nuclea_auto,
+
     }
