@@ -17,14 +17,14 @@ from mpl_toolkits.mplot3d import Axes3D  # noqa
 a = 5.0            # In Angst
 b = 6.0            
 c = 7.0
-k_c = 20          # CB anisotropy factor
-k_v = 20          # VB anisotropy factor
+k_c = 3            # CB anisotropy factor
+k_v = 3            # VB anisotropy factor
 Eg_eV = 0.1        # band gap in eV
 nkpt = 150         # k-mesh density per axis
-T_K = 700.0        # temperature (K)
+T_K = 300.0        # temperature (K)
 Nv_vb = 1          # VB degeneracy
 Nv_cb = 1          # CB degeneracy
-nE   = 10001        # number of energy bins for DOS
+nE   = 10001       # number of energy bins for DOS
 n_mu = 30001       # number of mu steps for BTE calculations
 tau0_s     = 1e-14 # For constant relaxation approximation
 outdir = "./"
@@ -287,3 +287,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
