@@ -15,8 +15,8 @@ from mpl_toolkits.mplot3d import Axes3D  # noqa
 # ---------------------------------------------------------------------
 # USER-DEFINED PARAMETERS
 a = 5.0            # In Angst
-b = 6.0            
-c = 7.0
+b = 6.0            # In Angst
+c = 7.0            # In Angst
 k_c = 3            # CB anisotropy factor
 k_v = 3            # VB anisotropy factor
 Eg_eV = 0.1        # band gap in eV
@@ -245,7 +245,7 @@ def main():
     Ec_eV = Ec_J * J_TO_EV - (mu0_J * J_TO_EV)
     label_idx = {"X": 0, "Gamma": n1, "Y": n1 + n2 - 1}
 
-    band2d_csv = os.path.join(outdir, "band_2D.csv")
+    band2d_csv = os.path.join(outdir, "bands_2D.csv")
     pd.DataFrame({
         "s_1_per_A": s,
         "kx_1_per_A": kpts[:,0],
@@ -259,18 +259,18 @@ def main():
     }).to_csv(band2d_csv, index=False)
 
 
-    # Seebeck distribution functions (SDF), calculated under 300K at Fermi level
+    # Conduction channel term, calculated under 300K at Fermi level
     channel_xE = np.asarray(tp["channel_xE"], dtype=float)
     channel_yE = np.asarray(tp["channel_yE"], dtype=float)
     channel_zE = np.asarray(tp["channel_zE"], dtype=float)
     dfdE = BTE.minus_df_dE(E_grid_J, mu0_J, T_K)
 
-    # E - Ef as x-axis
+    # Seebeck distribution function (SDF), E - Ef as x-axis
     L_xE = q_e * channel_xE * (E_grid_J - mu0_J) * dfdE
     L_yE = q_e * channel_yE * (E_grid_J - mu0_J) * dfdE
     L_zE = q_e * channel_zE * (E_grid_J - mu0_J) * dfdE
 
-    wf_csv = os.path.join(outdir, "weighting_function.csv")
+    wf_csv = os.path.join(outdir, "SDF.csv")
     pd.DataFrame({
         "E_abs (EV)": E_grid_J / q_e, # Absolute value
         "E_minus_mu_eV": E_rel_eV, # E - Ef
@@ -287,4 +287,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
