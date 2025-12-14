@@ -3,7 +3,7 @@
 
 import numpy as np
 
-#========================== Physical Constants in SI Units ===============================#
+# Physical Constants in SI Units
 
 hbar_SI = 1.054571817e-34 # Reduced Plank's Constant J*s
 kB_SI   = 1.380649e-23 # Boltzmann constant J/K
@@ -19,7 +19,7 @@ EV_TO_J   = q_e                 # 1 eV = 1.602176634e-19 J
 J_TO_EV   = 1.0 / q_e
 CM3_TO_M3 = 1e6                 # 1 cm^-3 = 1e6 m^-3
 
-#======================== Tools for Transport Calculations ================================#
+# Boltzmann transport equations calculation helpers
 def fermi(E, mu, T_K):
     x = np.clip((E - mu) / (kB_SI * T_K), -700.0, 700.0)
     return 1.0 / (1.0 + np.exp(x))
@@ -81,7 +81,7 @@ def get_velocity_grid(eigs_grid):
         "vx_cb": vx_cb, "vy_cb": vy_cb, "vz_cb": vz_cb,
     }
 
-#============================== Boltzmann Equations ==================================#
+# Boltzmann Equations
 
 # Precalculate the energy dependent part
 def precompute_channels_and_DOS(eigs_grid, vel_grid, E_bin, a, b, c,
@@ -147,7 +147,7 @@ def precompute_channels_and_DOS(eigs_grid, vel_grid, E_bin, a, b, c,
     channel_yE = scale * sum_vy2
     channel_zE = scale * sum_vz2
 
-    # Seebeck distibution function (SDF)
+    # Conduction channel for Seebeck, or Seebeck weighting function
     if mu_J is None:
         W_xE = np.zeros_like(channel_xE)
         W_yE = np.zeros_like(channel_yE)
@@ -374,3 +374,4 @@ def transport_properties(band_structure, nkpt, a, b, c, T_K,
         "N_nuclea_auto": N_nuclea_auto,
 
     }
+
