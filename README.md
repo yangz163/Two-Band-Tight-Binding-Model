@@ -44,7 +44,7 @@ python get_result.py
 
 **tansport.csv**:                    Axis-resolved themoelectric properties\
 **DOS.csv**:                         density of states\
-**band_2D.csv**:                     Band structuer along X -> GAMMA -> Y\
+**bands_2D.csv**:                     Band structuer along X -> GAMMA -> Y\
 **bands.png**:                       3D band stucture within XY-plane\
-**weighting_function.csv**:          Axis-resolved Seebeck distribution function (SDF)\
-**get_result.py**:                   Log of the calculations
+**SDF.csv**:          Axis-resolved Seebeck distribution function (SDF)\
+**get_result.log**:                   Log of the calculations
