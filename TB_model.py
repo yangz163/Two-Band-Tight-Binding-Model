@@ -10,7 +10,7 @@ hbar_SI = 1.054_571_817e-34   # J * s
 m_e     = 9.109_383_7015e-31  # kg
 q_e     = 1.602_176_634e-19   # J/eV  or C
 
-# --- TB primitives (masses, lattice, hopping) ---
+# Effective mass matrices
 def eff_mass(band_index: int, axis_index: int, k_c: float, k_v: float) -> float:
     """Effective mass (kg) for (band, axis)."""
     base = 0.2 * m_e
@@ -24,7 +24,7 @@ def eff_mass(band_index: int, axis_index: int, k_c: float, k_v: float) -> float:
         if axis_index == 2: return base          # z
     raise ValueError("Invalid (band_index, axis_index).")
 
-
+# Cell parameters for the hypothetical primitive cell
 def cell_para(axis_index: int, a: float, b: float, c: float) -> float:
 
     if axis_index == 0: return a
@@ -39,6 +39,7 @@ def hopping(band_index: int, axis_index: int,
     parameters = cell_para(axis_index, a, b, c) * Angst
     return (hbar_SI**2) / (2.0 * m_eff * parameters **2)
 
+# Constructing the TB model based on user provided parameters and returns band structure
 def build_tb(a, b, c, k_c, k_v, Eg_eV):
     """
     Unified dispersion:
@@ -85,5 +86,6 @@ def build_tb(a, b, c, k_c, k_v, Eg_eV):
             return Ec0(kx, ky, kz) - Ec0_G + Eg_eV * q_e
         else:
             raise ValueError("band_index must be 0 (VB) or 1 (CB)")
+
 
     return np.vectorize(E_disp)
